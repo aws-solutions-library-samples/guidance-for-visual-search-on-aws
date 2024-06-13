@@ -1,0 +1,287 @@
+<html>
+	<head>
+		<style>
+body {
+	font-family: Arial, Verdana, sans-serif;
+}
+	
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  /*width: 80%; /* Could be more or less, depending on screen size */
+  width:910px;
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+img.vsimage {
+	border: 5px solid transparent
+}
+
+img.vsimage:hover {
+	border: 5px solid #ff0000;
+    overflow: hidden; 
+}
+
+.centerDiv {
+  margin: auto;
+  text-align: center;
+  
+}
+.vsDiv {
+  width:400px;
+}
+
+.vsTable {
+	text-align: center;
+	border: 3px solid rgb(224, 226,225);
+	background: rgb(248, 249, 251);
+}
+
+#searchResultsDiv {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  margin: 0 auto;
+  display: grid;
+  gap: 1rem;
+  border: 2px solid whitesmoke;
+  padding: 10px;
+  max-width: 1000px;
+}
+
+.productTile {
+	text-align: center;
+	border: 3px solid rgb(224, 226,225);
+	background: rgb(248, 249, 251);
+	font-size: 12px;
+	width: 300px;
+}
+
+.smallText {
+	font-size: 10;
+	font-family: Verdana, sans-serif;
+}
+		</style>
+	</head>
+    <body>
+	<div class="centerDiv"><h1>Visual Search</h1></div>
+	
+	<div class="centerDiv">
+		<table class="centerDiv">
+			<tr>
+				<td>
+					API Key:
+				</td>
+				<td><input type="password" id="apiKeyInput"></input>
+				</td>
+				<td><div class="smallText">(Find from API Gateway's API Keys page)</div>
+				</td>
+			</tr>
+		</table>
+		<br><br>
+	</div>
+	<div class="vsDiv centerDiv">
+		<div><b>Search using image as input</b></div>
+		<div>
+			<table class="vsTable" width="100%">
+				<tr>
+					<td><img id='searchInputImage'></img><br>
+					</td>
+				</tr>
+				<tr>
+					<td class="smallText"><a href="javascript:showSearchImagePopup()">Pick another search input image</a></td>
+				</tr>
+				<tr>
+					<td>
+						<hr/>
+					</td>
+				</tr>
+				<tr>
+					<td><input type="button" value="Find visually similar products" onclick="doVisualSearch()"></input><br><br></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	
+	<div class="centerDiv">
+		<br><br>
+		<div><b>Search Results</b></div>
+		<div id="searchResultsDiv">
+			
+		</div>
+	</div>
+	
+	<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Select an image for visual search</p>
+	<table>
+		<tr>
+			<td><a href="javascript:selectImage('vsimage1')"><img id="vsimage1" width="150" class="vsimage" src="/prod/products/SunglassesSearchInput.jpg"></img></a></td>
+			<td><a href="javascript:selectImage('vsimage2')"><img id="vsimage2" width="150" class="vsimage" src="/prod/products/ShoeSearchInput.jpg"></img></a></td>
+			<td><a href="javascript:selectImage('vsimage3')"><img id="vsimage3" width="150" class="vsimage" src="/prod/products/BraceletSearchInput.jpg"></img></a></td>
+			<td><a href="javascript:selectImage('vsimage4')"><img id="vsimage4" width="150" class="vsimage" src="/prod/products/DrawerSearchInput.jpg"></img></a></td>
+			<td><a href="javascript:selectImage('vsimage5')"><img id="vsimage5" width="150" class="vsimage" src="/prod/products/SuitcaseSearchInput.jpg"></img></a></td>
+		</tr>
+	</table>
+  </div>
+
+</div>
+<canvas id="canvasElement" style="border:1px solid black; display:none;" ></canvas>
+
+<script>
+function getEncodedImage() {
+	var img = document.getElementById("searchInputImage");
+
+	var canvasElmt = document.getElementById("canvasElement");
+	canvasElmt.width = img.naturalWidth;
+	canvasElmt.height = img.naturalHeight;
+	var ctx = canvasElmt.getContext("2d");
+	ctx.drawImage(img, 0, 0);
+	
+	b64 = canvasElmt.toDataURL();
+	return b64.split(",")[1];
+}
+
+
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+//btn.onclick = function() {
+function showSearchImagePopup(){
+  modal.style.display = "block";
+}
+
+closePopup = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = closePopup;
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+document.getElementById('searchInputImage').src = document.getElementById('vsimage1').src; 
+
+selectImage = function(id) {
+	document.getElementById('searchInputImage').src = document.getElementById(id).src;
+	closePopup();
+}
+
+doVisualSearch = function(){
+	apiKey = document.getElementById('apiKeyInput').value;
+	if (!apiKey) {
+		alert('Provide the API Key for the API Gateway');
+		return false;
+	}
+	base64Image = getEncodedImage();
+	searchNode = document.getElementById("searchResultsDiv");
+	while( searchNode.firstChild )
+		searchNode.removeChild( searchNode.firstChild );
+	
+	body = {"content": base64Image}
+	
+	fetch('/prod/products/search', {
+	  method: 'POST',
+	  headers: {
+		Accept: 'application.json',
+		'Content-Type': 'application/json',
+		'x-api-Key' : apiKey
+	  },
+	  body: JSON.stringify(body),
+	}).then(response => {
+		if (!response.ok) {
+		  throw new Error('Network response was not ok');
+		}
+		return response.json();
+	  })
+	  .then(data => {
+		console.log(data);
+		srDiv = document.getElementById('searchResultsDiv');
+		/*
+			Response format
+			[
+				[
+					"B07HM66SWZ",
+					"AmazonBasics Belltown Softside Spinner - 68 cm, Black",
+					"1908025d.jpg",
+					0.71527904
+				],
+	  		]
+		*/
+
+		data.forEach(product => {
+			prodDiv = document.createElement('div');
+			prodDiv.className = 'productTile';
+			prodImg = document.createElement('img');
+			prodImg.src = "/prod/products/" + product[2];
+			prodImg.width = '100';
+			prodDiv.appendChild(prodImg);
+			prodNameDiv = document.createElement('div');
+			prodNameDiv.innerText = product[1];
+			prodDiv.appendChild(prodNameDiv);
+			prodScoreDiv = document.createElement('div');
+			prodScoreDiv.className = "smallText";
+			prodScoreDiv.innerText = "Score: " + product[3];
+			prodDiv.appendChild(prodScoreDiv);
+
+			searchNode.appendChild(prodDiv);
+		});
+
+	  })
+	  .catch(error => {
+		console.error('Error:', error);
+		document.getElementById('searchResultsDiv').innerText = "Error occurred !! " + error;
+	});
+}
+
+
+</script>
+<br>
+
+</body>
+</html>
