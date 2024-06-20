@@ -37,7 +37,7 @@ The solution is an implementation of semantic search, based on product images. T
 
 3. The Lambda Function then invokes Amazon Bedrock’s Titan Multimodal Embedding model to create vector embeddings for each product in the catalog, based on the primary image and description of the products.
 
-4. The Lambda Function finally persists these vector embeddings as a k-NN vectors, along with product meta-data in Amazon OpenSearch vector index. This index is used as the source for semantic image search
+4. The Lambda Function finally persists these vector embeddings as a k-NN vectors, along with product meta-data in the vector store (e.g. Amazon OpenSearch or Amazon DocumentDB or Amazon Aurora, etc.). This index is used as the source for semantic image search
 
 5. The user initiates a visual search request through frontend application by uploading a product image.
 
@@ -47,9 +47,9 @@ The solution is an implementation of semantic search, based on product images. T
 
 8. Lambda function then invokes Amazon Titan Multimodal Embeddings model hosted on Amazon Bedrock to generate the multimodal embedding based on the input image uploaded by user and the image caption (if generated in step 3).
 
-9. Lambda function then, performs a k-NN search on the Amazon OpenSearch vector index, to find semantically similar results for the embedding generated in step 4.
+9. Lambda function then, performs a k-NN search on the vector store index, to find semantically similar results for the embedding generated in step 4.
 
-10. The resultant semantic search results from Amazon Open Search are then filtered to eliminate any duplicates, enriched with product meta-data from the search index and passed back to API Gateway.
+10. The resultant semantic search results from the vector store are then filtered to eliminate any duplicates, enriched with product meta-data from the search index and passed back to API Gateway.
 
 11. Finally, API Gateway response is returned to the client, to display the search results.
 
