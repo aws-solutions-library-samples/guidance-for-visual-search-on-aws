@@ -145,20 +145,24 @@ To verify a successful deployment of this guidance, open [CloudFormation](https:
 ### Do visual search
 
 #### From UI
-- Open API Gateway's 'prod' stage URL. https://xxxxx.execute-api.<region>.amazonaws.com/prod
+* Open API Gateway's ```prod``` stage URL which looks like ```https://xxxxx.execute-api.<region>.amazonaws.com/prod```
+   * You can get the API Gateway's URL from the ```Outputs``` of the CDK execution.
+   * Alternatively, you can go to API Gateway in AWS Console, select VisualSearchAPIGateway API, select ```Stages``` from left navigation sidebar, select ```prod``` stage and copy the value of ```Invoke URL```.   
+
 ![Search Input](/assets/search1.jpg)
-- This shows a sample UI that can be used for visual search.
-- Select one of the given images as input.
+* This shows a sample UI that can be used for visual search.
+* Select one of the given images as input.
 ![Select Input Image](/assets/search2.jpg)
-- Provide the API Key from the API Gateway's API Keys.
-- Click on "Find visually similar products". The search results would be shown.
+* Provide the API Key in the API Key text box.
+   * To get the API Key, go to API Gateway in AWS Console, select ```API Keys``` from the left navigation sidebar, find the API Key of Visual Search and copy its API Key.
+* Click on "Find visually similar products". The search results would be shown.
 ![Search Input](/assets/search3.jpg)
 
 
 #### Through API
 - Open AWS Console and go to API Gateway
 - Go to the Visual Search API
-- Invoke the API POST https://xxxxx.execute-api.<region>.amazonaws.com/prod/products/search by passing a JSON in the format {"content": "base64 encoded image"} 
+- Find the ```prod``` stage URL and do ```POST https://xxxxx.execute-api.<region>.amazonaws.com/prod/products/search``` by passing a JSON in the format ```{"content": "<base64 encoded image>"}``` 
 
 ### Sample searches
 #### Sample search - Sunglasses
