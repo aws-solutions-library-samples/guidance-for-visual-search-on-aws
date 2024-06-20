@@ -1,8 +1,8 @@
 node_modules
+.venv
 
 # CDK asset staging directory
 .cdk.staging
 cdk.out
 .env
-
 .DS_Store
