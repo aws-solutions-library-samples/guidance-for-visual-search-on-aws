@@ -1,4 +1,4 @@
-# Solution Visual Search For Retail With Amazon Bedrock And Amazon Opensearch Guidance
+# Guidance for Simple Visual Search on AWS
 
 ## Table of Contents
 
@@ -126,7 +126,7 @@ This Guidance uses AWS CDK. If you are using aws-cdk for the first time, please 
 
 ## Deployment Validation
 
-To verify a successful deployment of this guidance, open [CloudFormation](https://console.aws.amazon.com/cloudformation/home) console, and verify the status of the stack infrastructure stack is `CREATE_COMPLETE`.
+To verify a successful deployment of this guidance, open [CloudFormation](https://console.aws.amazon.com/cloudformation/home) console, and verify that the status of the stack named `VisualSearchStack` is `CREATE_COMPLETE`.
 
 ## Running the Guidance
 
