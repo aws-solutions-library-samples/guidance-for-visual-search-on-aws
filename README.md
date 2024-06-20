@@ -119,11 +119,11 @@ This Guidance uses AWS CDK. If you are using aws-cdk for the first time, please 
     ```bash
     npm install
     ```
-6. Verify that the CDK deployment correctly synthesizes the CloudFormation template:
+7. Verify that the CDK deployment correctly synthesizes the CloudFormation template:
     ```bash
     cdk synth
     ```
-7. Deploy the guidance:
+8. Deploy the guidance:
     ```bash
     cdk deploy 
     ```
@@ -135,10 +135,11 @@ To verify a successful deployment of this guidance, open [CloudFormation](https:
 ## Running the Guidance
 
 ### Ingest products into the OpenSearch vector database
-- Open AWS Console and go to Lambda
-- Select the checkbox next to function prefixed with `VisualSearchStack-VisualSearchProductIngestionLamb-`
+- Open AWS Console and go to [Lambda](https://console.aws.amazon.com/lambda/home)
+- Select the checkbox next to function prefixed with `VisualSearchStack-VisualSearchProductIngestionLamb`
 - Select "Actions"
 - Select "Test"
+- For Test event, select “Test” to run the lambda function
 - This will ingest the product data into Amazon OpenSearch serverless by downloading the product.json from the S3 bucket and product images from Berkeley's S3 bucket s3://amazon-berkeley-objects. It also copies the product images to the local S3 bucket.
 
 ### Do visual search
