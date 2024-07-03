@@ -43,11 +43,11 @@ The solution is an implementation of semantic search, based on product images. T
 
 6. The application uses Amazon API Gateway REST API to invoke a pre-configured proxy Lambda function to process the visual search request.
 
-7. Lambda function first generates the caption for the input image using the Anthropic Claude 3 Sonnet model hosted on Amazon Bedrock. Optional step for better search results. 
+7. Lambda function first generates the caption for the input image using the Anthropic Claude 3 Sonnet model hosted on Amazon Bedrock. Optional step to create multimodal embedding based on both the input image and caption of the image, for improved search results.
 
-8. Lambda function then invokes Amazon Titan Multimodal Embeddings model hosted on Amazon Bedrock to generate the multimodal embedding based on the input image uploaded by user and the image caption (if generated in step 3).
+8. Lambda function then invokes Amazon Titan Multimodal Embeddings model hosted on Amazon Bedrock to generate the multimodal embedding based on the input image uploaded by user and the image caption (if generated in step 7).
 
-9. Lambda function then, performs a k-NN search on the vector store index, to find semantically similar results for the embedding generated in step 4.
+9. Lambda function then, performs a k-NN search on the vector store index, to find semantically similar results for the embedding generated in step 8.
 
 10. The resultant semantic search results from the vector store are then filtered to eliminate any duplicates, enriched with product meta-data from the search index and passed back to API Gateway.
 
