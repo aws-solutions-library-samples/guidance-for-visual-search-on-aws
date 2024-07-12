@@ -69,7 +69,7 @@ The following table provides a sample cost breakdown for deploying this Guidance
 | Amazon API Gateway | 100,000 REST API calls per month  | $ 0.35month |
 | AWS Lambda	 | 100,000 invocations per month | $ 0.68 |
 | Amazon Bedrock Titan Multimodal Embeddings feature	 | 100,000 input images per month and 1200000 input tokens | $ 6.96 |
-| Amazon Bedrock Anthropic Claude v3 Sonnet	 | 100,000 input images per month and 1200000 input tokens and 1200000 output tokens | $ 54.00 |
+| Amazon Bedrock Anthropic Claude v3 Sonnet	 | 100,000 input images per month  | $ 4843.72 |
 | Amazon Opensearch Serverless	 | 2 OCU(Indexing, Search and query cost) and 1GB storage | $ 350.42 |
 
 ## Prerequisites
