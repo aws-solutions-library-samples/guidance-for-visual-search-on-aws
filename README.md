@@ -193,3 +193,10 @@ To delete the deployed resources, use the AWS CDK CLI to run the following steps
     ```bash
     cdk destroy
     ```
+
+## Authors
+
+Rajesh Sripathi\
+Benedict Nartey-Tokoli\
+Dantis Stephen
+    
